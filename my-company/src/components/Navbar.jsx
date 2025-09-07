@@ -6,10 +6,12 @@ function Navbar() {
         <nav
             style={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-end",
+                backgroundColor: "#1c1d1eff",
                 alignItems: "center",
                 padding: "10px",
-                background: "#333",
+                fontSize: "18px",
+                fontWeight: "bold"
             }}>
             <Link to="/" style={{ margin: "0 10px", color: "white" }}>Home</Link>
             <Link to="/about" style={{ margin: "0 10px", color: "white" }}>About</Link>
