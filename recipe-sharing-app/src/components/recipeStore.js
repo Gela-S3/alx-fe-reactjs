@@ -30,6 +30,7 @@ import { create } from 'zustand';
 const useRecipeStore = create((set) => ({
     recipes: [],
     favorites: [],
+    searchTerm: '',
     recommendations: [],
 
     // Action to add a recipe
@@ -64,6 +65,24 @@ const useRecipeStore = create((set) => ({
             );
             return { recommendations: recommended };
         }),
+    // Set the search term and filter recipes dynamically
+    setSearchTerm: (term) =>
+        set((state) => ({
+            searchTerm: term,
+            filteredRecipes: state.recipes.filter((recipe) => {
+                const titleMatch = recipe.title.toLowerCase().includes(term.toLowerCase());
+                const ingredientsMatch = recipe.ingredients
+                    ? recipe.ingredients.some((ing) =>
+                        ing.toLowerCase().includes(term.toLowerCase())
+                    )
+                    : false;
+                const prepTimeMatch = recipe.prepTime
+                    ? recipe.prepTime.toString().includes(term)
+                    : false;
+
+                return titleMatch || ingredientsMatch || prepTimeMatch;
+            }),
+        })),
 }));
 
 
