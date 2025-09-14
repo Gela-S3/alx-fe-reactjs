@@ -25,10 +25,12 @@
 
 
 
-import {create}  from 'zustand';
+import { create } from 'zustand';
 
 const useRecipeStore = create((set) => ({
-    recipes: [],
+      recipes: [],
+      favorites: [],
+      recommendations: [],
 
     // Action to add a recipe
     addRecipe: (newRecipe) =>
@@ -40,7 +42,7 @@ const useRecipeStore = create((set) => ({
     setRecipes: (recipes) => set({ recipes }),
 
     ///Remove recipe from favorites
-    removeFavorite: (recipeId) =>
+    deleteRecipe: (recipeId) =>
         set((state) => ({
             favorites: state.favorites.filter((id) => id !== recipeId),
         })),
