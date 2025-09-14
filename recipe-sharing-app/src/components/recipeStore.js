@@ -28,9 +28,9 @@
 import { create } from 'zustand';
 
 const useRecipeStore = create((set) => ({
-      recipes: [],
-      favorites: [],
-      recommendations: [],
+    recipes: [],
+    favorites: [],
+    recommendations: [],
 
     // Action to add a recipe
     addRecipe: (newRecipe) =>
@@ -47,6 +47,13 @@ const useRecipeStore = create((set) => ({
             favorites: state.favorites.filter((id) => id !== recipeId),
         })),
 
+    // Update an existing recipe
+    updateRecipe: (updatedRecipe) =>
+        set((state) => ({
+            recipes: state.recipes.map((recipe) =>
+                recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+            ),
+        })),
 
     // Generate recommendations (simple mock: pick some from favorites)
     generateRecommendations: () =>
